@@ -1,0 +1,6 @@
+.btnCart{
+    transition: all .2s ease-in-out; 
+}
+.btnCart:hover{
+    transform: scale(1.2);
+}

@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+body{
+font-family: 'Crimson Text', serif;
+}
+
+.lblError{
+    display: none;
+}
+
+.card {
+    background-color: #f2eae3;
+    height: 130px;
+    overflow:hidden;
+    border: none;
+    border-radius: 15px
+}
+
+.imagename {
+    font-size: 14px;
+    font-weight: bold
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/skola/JavaWeb/Repository/src/repo/RepositoryFactory.java</file>
+            <file>file:/D:/skola/JavaWeb/Repository/src/sql/SqlItemRepository.java</file>
+            <file>file:/D:/skola/JavaWeb/Repository/src/sql/SqlAccountRepository.java</file>
+            <file>file:/D:/skola/JavaWeb/Repository/src/repo/ItemRepository.java</file>
+            <file>file:/D:/skola/JavaWeb/Repository/src/repo/AccountRepository.java</file>
+            <file>file:/D:/skola/JavaWeb/Repository/src/sql/DataSourceSingleton.java</file>
+        </group>
+    </open-files>
+</project-private>
