@@ -86,11 +86,11 @@
                         <div class="col">TOTAL PRICE</div>
                         <div class="col text-right">&euro; ${totalPrice}</div>
                     </div> 
-                    <button class="btn">
+                    <a class="btn" href="checkout">
                         <span class="material-icons-outlined">
                             shopping_cart_checkout
                         </span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

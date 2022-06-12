@@ -36,6 +36,18 @@
         <servlet-name>HistoryServlet</servlet-name>
         <servlet-class>controllers.HistoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>controllers.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>reviewPaymentServlet</servlet-name>
+        <servlet-class>controllers.ReviewPaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExecutePaymentServlet</servlet-name>
+        <servlet-class>controllers.ExecutePaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>HistoryServlet</servlet-name>
         <url-pattern>/history</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reviewPaymentServlet</servlet-name>
+        <url-pattern>/reviewPayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExecutePaymentServlet</servlet-name>
+        <url-pattern>/executePayment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
