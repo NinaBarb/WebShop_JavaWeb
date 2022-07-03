@@ -44,6 +44,14 @@ create table LoginHistory
 	Email nvarchar(50) not null,
 )
 
+create table PaymentHistory
+(
+	IDPaymentHistory int constraint PK_PaymentHistory primary key identity,
+	PaymentType nvarchar(50) not null,
+	UserAccountID int constraint FK_UserAccountID foreign key references UserAccount(IDUserAccount),
+	Items nvarchar(max) not null
+)
+
 
 ------------PROCEDURES-----------
 ------------ACCOUNT-----------
@@ -191,6 +199,7 @@ where categoryID = @IDCategory
 create proc getLoginHistory
 as
 select*from LoginHistory
+go
 
 create proc createLoginHistory
 	@LoginDate datetime,
@@ -203,3 +212,28 @@ as
 insert into LoginHistory(LoginDate, IPAddress, FirstName, LastName, Email)
 values(@LoginDate, @IPAddress, @FirstName, @LastName, @Email)
 set @IDLoginHistory = SCOPE_IDENTITY()
+go
+
+------------PAYMENT HISTORY-----------
+create proc getPaymentHistoryADMIN
+as
+select*from PaymentHistory
+go
+
+create proc getPaymentHistoryUSER
+	@IDUserAccount int
+as
+select*from PaymentHistory
+inner join UserAccount on PaymentHistory.UserAccountID = UserAccount.IDUserAccount
+where IDUserAccount = @IDUserAccount
+go
+
+create proc createPaymentHistory
+	@PaymentType nvarchar(50),
+	@UserAccountID int,
+	@Items nvarchar(max),
+	@IDPaymentHistory int out
+as
+insert into PaymentHistory(PaymentType, UserAccountID, Items)
+values(@PaymentType, @UserAccountID, @Items)
+set @IDPaymentHistory = SCOPE_IDENTITY()

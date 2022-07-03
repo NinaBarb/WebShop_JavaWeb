@@ -21,6 +21,7 @@ import com.paypal.base.rest.PayPalRESTException;
 import java.util.ArrayList;
 import java.util.List;
 import models.OrderDetail;
+import models.UserAccount;
 
 /**
  *
@@ -32,10 +33,10 @@ public class PaymentServices {
     private static final String CLIENT_SECRET = "EOH-2PtSzBq2LlpxKInL8uOmDoBsZsN_tV6Luf-y3mXkouhI6mVJFX2L2Umvor5vxdVGwHDBFxkBCK_g";
     private static final String MODE = "sandbox";
 
-    public String authorizePayment(OrderDetail orderDetail)
+    public String authorizePayment(OrderDetail orderDetail, UserAccount userAccount)
             throws PayPalRESTException {
 
-        Payer payer = getPayerInformation();
+        Payer payer = getPayerInformation(userAccount);
         RedirectUrls redirectUrls = getRedirectURLs();
         List<Transaction> listTransaction = getTransactionInformation(orderDetail);
 
@@ -70,14 +71,14 @@ public class PaymentServices {
         return payment.execute(apiContext, paymentExecution);
     }
 
-    private Payer getPayerInformation() {
+    private Payer getPayerInformation(UserAccount userAccount) {
         Payer payer = new Payer();
         payer.setPaymentMethod("paypal");
 
         PayerInfo payerInfo = new PayerInfo();
-        payerInfo.setFirstName("William")
-                .setLastName("Peterson")
-                .setEmail("william.peterson@company.com");
+        payerInfo.setFirstName(userAccount.getFirstName())
+                .setLastName(userAccount.getLastName())
+                .setEmail(userAccount.getEmail());
 
         payer.setPayerInfo(payerInfo);
 
@@ -115,7 +116,7 @@ public class PaymentServices {
         item.setName(orderDetail.getProductName());
         item.setPrice(orderDetail.getSubtotal());
         item.setTax(orderDetail.getTax());
-        item.setQuantity("1");
+        item.setQuantity(orderDetail.getQuantity());
 
         items.add(item);
         itemList.setItems(items);

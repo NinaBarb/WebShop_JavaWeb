@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+
         <link rel="stylesheet" href="css/navbar.css">
     </head>
     <body>
@@ -42,12 +42,20 @@
                             </i>                 
                         </a>
                         <c:if test="${sessionScope.userAccount.get() != null}">
-                            <a class="btn btnCart" href="history">
+                            <c:if test="${sessionScope.userAccount.get().isAdmin == true}">
+                                <a class="btn btnCart" href="history">
+                                    <i class="material-icons-outlined text-secondary">
+                                        fact_check
+                                    </i>                 
+                                </a>
+                            </c:if>
+                            
+                            <a class="btn btnCart" href="purchaseHistory">
                                 <i class="material-icons-outlined text-secondary">
-                                    fact_check
+                                    payments
                                 </i>                 
                             </a>
-                            
+
                             <a class="btn btnCart" href="logout">
                                 <i class="material-icons-outlined text-secondary">
                                     logout

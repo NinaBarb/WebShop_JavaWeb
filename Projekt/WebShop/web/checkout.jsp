@@ -22,6 +22,10 @@
                         <td><input type="text" name="product" value="Next iPhone" /></td>
                     </tr>
                     <tr>
+                        <td>Quantity:</td>
+                        <td><input type="text" name="quantity" value="1" /></td>
+                    </tr>
+                    <tr>
                         <td>Sub Total:</td>
                         <td><input type="text" name="subtotal" value="100" /></td>
                     </tr>

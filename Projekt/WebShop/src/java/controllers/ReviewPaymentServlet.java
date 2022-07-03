@@ -10,21 +10,30 @@ import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.ShippingAddress;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
+import enums.PaymentType;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.PaymentHistory;
+import models.Product;
+import models.UserAccount;
 import paypal.PaymentServices;
+import repo.RepositoryFactory;
+import sql.HistoryRepositoryImpl;
 
 /**
  *
  * @author Nina
  */
 public class ReviewPaymentServlet extends HttpServlet {
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,5 +55,4 @@ public class ReviewPaymentServlet extends HttpServlet {
             Logger.getLogger(ReviewPaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

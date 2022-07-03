@@ -48,6 +48,10 @@
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <servlet-class>controllers.ExecutePaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PurchaseHistoryServlet</servlet-name>
+        <servlet-class>controllers.PurchaseHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <url-pattern>/executePayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseHistoryServlet</servlet-name>
+        <url-pattern>/purchaseHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

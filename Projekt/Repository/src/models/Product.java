@@ -5,13 +5,20 @@
  */
 package models;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Nina
  */
-public class Product{
+public class Product implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
+    
     private int id;
     private String title;
     private String description;
@@ -117,5 +124,12 @@ public class Product{
         return true;
     }
     
+     private void writeObject(ObjectOutputStream oos) 
+      throws IOException {
+    }
+
+    private void readObject(ObjectInputStream ois) 
+      throws ClassNotFoundException, IOException {
+    }
     
 }

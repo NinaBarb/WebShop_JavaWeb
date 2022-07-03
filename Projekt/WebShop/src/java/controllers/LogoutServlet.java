@@ -6,7 +6,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -28,24 +27,13 @@ public class LogoutServlet extends HttpServlet {
             cookie.setMaxAge(0); 
             response.addCookie(cookie); 
         }
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        response.sendRedirect("home");
     }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 
 }

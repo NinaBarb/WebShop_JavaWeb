@@ -7,6 +7,7 @@ package repo;
 
 import java.util.List;
 import models.LoginHistory;
+import models.PaymentHistory;
 
 /**
  *
@@ -16,4 +17,8 @@ public interface IHistoryRepository {
     
     int createLoginHistory(LoginHistory loginHistory)throws Exception;
     List<LoginHistory> getLoginHistory() throws Exception;
+    
+    int createPaymentHistory(PaymentHistory paymentHistory)throws Exception;
+    List<PaymentHistory> getPaymentHistory_ADMIN() throws Exception;
+    List<PaymentHistory> getPaymentHistory_USER(int idUser) throws Exception;
 }
