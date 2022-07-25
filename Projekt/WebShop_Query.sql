@@ -24,15 +24,10 @@ create table Product
 	Title nvarchar(50),
 	Descr nvarchar(250),
 	Price float,
-	PicturePath nvarchar(max)
+	PicturePath nvarchar(max),
+	CategoryID int constraint FK_CategoryID foreign key references Category(IDCategory)
 )
 
-create table CategoryProduct
-(
-	IDCategoryProduct int constraint PK_CategoryProduct primary key identity,
-	ProductID int constraint FK_ProductID foreign key references Product(IDProduct),
-	categoryID int constraint FK_CategoryID foreign key references Category(IDCategory)
-)
 
 create table LoginHistory
 (
@@ -49,7 +44,8 @@ create table PaymentHistory
 	IDPaymentHistory int constraint PK_PaymentHistory primary key identity,
 	PaymentType nvarchar(50) not null,
 	UserAccountID int constraint FK_UserAccountID foreign key references UserAccount(IDUserAccount),
-	Items nvarchar(max) not null
+	Items nvarchar(max) not null,
+	PaymentDate datetime not null
 )
 
 
@@ -125,7 +121,7 @@ select*from Category
 where IDCategory = @IDCategory
 
 
-alter proc updateCategory
+create proc updateCategory
 	@IDCategory int,
 	@Title nvarchar(50),
 	@PicturePath nvarchar(max)
@@ -144,11 +140,9 @@ alter procedure createProduct
 	@CategoryID int,
 	@IDProduct int out
 as 
-insert into Product(Title, Descr, Price, PicturePath)
-values (@Title, @Descr, @Price, @PicturePath)
+insert into Product(Title, Descr, Price, PicturePath, CategoryID)
+values (@Title, @Descr, @Price, @PicturePath, @CategoryID)
 set @IDProduct = SCOPE_IDENTITY()
-insert into CategoryProduct(ProductID, categoryID)
-values(@IDProduct, @CategoryID)
 
 create procedure getProducts
 as
@@ -165,8 +159,6 @@ where Title = @Title
 create proc deleteProduct
 	@IDProduct int
 as
-delete from CategoryProduct
-where ProductID=@IDProduct
 delete from Product
 where IDProduct = @IDProduct
 
@@ -181,19 +173,23 @@ create proc updateProduct
 	@Title nvarchar(50),
 	@Descr nvarchar(250),
 	@Price float,
-	@PicturePath nvarchar(max)
+	@PicturePath nvarchar(max),
+	@CategoryID int
 as
 update Product
-set Title = @Title, Descr = @Descr, @Price = Price, PicturePath = @PicturePath
+set Title = @Title, Descr = @Descr, PicturePath = @PicturePath, Price = @Price , CategoryID = @CategoryID
 where IDProduct = @IDProduct
 
 
-create proc getProductsByCategory
+alter proc getProductsByCategory
 	@IDCategory int
 as
-select Product.IDProduct, Product.Title, Product.Descr, Product.Price, Product.PicturePath from CategoryProduct
-inner join Product on ProductID = IDProduct
+select * from Product
 where categoryID = @IDCategory
+
+select*from Category
+
+exec getProductsByCategory 3
 
 ------------LOGIN HISTORY-----------
 create proc getLoginHistory
@@ -232,8 +228,19 @@ create proc createPaymentHistory
 	@PaymentType nvarchar(50),
 	@UserAccountID int,
 	@Items nvarchar(max),
+	@PaymentDate datetime ,
 	@IDPaymentHistory int out
 as
-insert into PaymentHistory(PaymentType, UserAccountID, Items)
-values(@PaymentType, @UserAccountID, @Items)
+insert into PaymentHistory(PaymentType, UserAccountID, Items, PaymentDate)
+values(@PaymentType, @UserAccountID, @Items, @PaymentDate)
 set @IDPaymentHistory = SCOPE_IDENTITY()
+go
+
+select*from PaymentHistory
+select * from LoginHistory
+select*from UserAccount
+
+insert into PaymentHistory(PaymentType, UserAccountID, Items, PaymentDate)
+values ('PAYPAL', 15, 'Stolica(1)','2022-08-04 00:00:00.000'),
+('PAYPAL', 15, 'Kompjuter(2)','2022-07-12 00:00:00.000'),
+('PAYPAL', 14, 'Mis(1)','2022-08-05 00:00:00.000')

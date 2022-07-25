@@ -27,6 +27,7 @@ function removeProductFromCart(id) {
         },
         success: function () {
             $("#" + id).closest(".cartProducts").remove();
+            location.reload();
         },
         error: function () {
             console.log("error");
@@ -48,6 +49,7 @@ function reduceQuantity(id, element) {
             if (response === 0) {
                 $(element).closest(".cartProducts").remove();
             }
+            location.reload();
         },
         error: function () {
             console.log("error");
@@ -66,9 +68,19 @@ function increaseQuantity(id, element) {
         },
         success: function () {
             console.log("Product quantity increased!");
+            location.reload();
         },
         error: function () {
             console.log("error");
         }
     });
 }
+
+$('#inlineRadio1').on('click', () => {
+    $('#cashOnDelivery').css('display', 'block');
+    $('#checkout').css('display', 'none');
+});
+$('#inlineRadio2').on('click', () => {
+    $('#cashOnDelivery').css('display', 'none');
+    $('#checkout').css('display', 'block');
+});

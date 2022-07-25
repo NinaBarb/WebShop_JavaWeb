@@ -25,6 +25,7 @@ function deleteCategory(id, element) {
             },
             success: function (data, textStatus, jqXHR) {
                 $(element).closest("tr").remove();
+                clearInput();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -74,7 +75,7 @@ async function addCategory() {
         },
         success: function (data, textStatus, jqXHR) {
             console.log(data);
-            $(".tableBody").load(window.location.href + " .tableBody");
+            window.location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -100,16 +101,7 @@ async function updateCategory(id) {
         },
         success: function (data, textStatus, jqXHR) {
             console.log(data);
-            $(".tableBody").append("<tr>"
-                    + "<td>" + data.id + "</td>"
-                    + "<td>" + data.title + "</td>"
-                    + "<td>" + data.picturePath + "</td>"
-                    + "<td>"
-                    + "<a href='#' class='edit' onclick='getCategory(${category.id})'><i class='material-icons'>&#xE254;</i></a>"
-                    + "<a href='#' class='delete' onClick='deleteCategory(${category.id}, this)'><i class='material-icons'>&#xE872;</i></a>"
-                    + "</td>"
-                    + "</tr>");
-            clearInput();
+            location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);

@@ -33,7 +33,7 @@ public class PaymentServices {
     private static final String CLIENT_SECRET = "EOH-2PtSzBq2LlpxKInL8uOmDoBsZsN_tV6Luf-y3mXkouhI6mVJFX2L2Umvor5vxdVGwHDBFxkBCK_g";
     private static final String MODE = "sandbox";
 
-    public String authorizePayment(OrderDetail orderDetail, UserAccount userAccount)
+    public String authorizePayment(List<OrderDetail> orderDetail, UserAccount userAccount)
             throws PayPalRESTException {
 
         Payer payer = getPayerInformation(userAccount);
@@ -93,32 +93,33 @@ public class PaymentServices {
         return redirectUrls;
     }
 
-    private List<Transaction> getTransactionInformation(OrderDetail orderDetail) {
+    private List<Transaction> getTransactionInformation(List<OrderDetail> orderDetail) {
         Details details = new Details();
-        details.setShipping(orderDetail.getShipping());
-        details.setSubtotal(orderDetail.getSubtotal());
-        details.setTax(orderDetail.getTax());
 
         Amount amount = new Amount();
         amount.setCurrency("EUR");
-        amount.setTotal(orderDetail.getTotal());
+        float total = 0;
+        for (OrderDetail product : orderDetail) {
+            total += product.getSubtotalFloat() * Float.parseFloat(String.valueOf(product.getQuantity()));
+        }
+        amount.setTotal(String.format("%.3f", total));
         amount.setDetails(details);
 
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-        transaction.setDescription(orderDetail.getProductName());
 
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
 
-        Item item = new Item();
-        item.setCurrency("EUR");
-        item.setName(orderDetail.getProductName());
-        item.setPrice(orderDetail.getSubtotal());
-        item.setTax(orderDetail.getTax());
-        item.setQuantity(orderDetail.getQuantity());
+        for (OrderDetail product : orderDetail) {
+            Item item = new Item();
+            item.setCurrency("EUR");
+            item.setName(product.getProductName());
+            item.setPrice(product.getSubtotal());
+            item.setQuantity(product.getQuantity());
 
-        items.add(item);
+            items.add(item);
+        }
         itemList.setItems(items);
         transaction.setItemList(itemList);
 

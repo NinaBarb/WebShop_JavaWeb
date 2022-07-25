@@ -14,9 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.Category;
-import models.UserAccount;
 import repo.RepositoryFactory;
 import sql.CategoryRepositoryImpl;
 import utils.GsonUtils;
@@ -45,7 +43,6 @@ public class CategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            checkUser(request, response);
             initRepo();
             getCategories(request, response);
         } catch (Exception ex) {
@@ -79,11 +76,6 @@ public class CategoryServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(CategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 
     private void initRepo() {
@@ -122,16 +114,6 @@ public class CategoryServlet extends HttpServlet {
         Optional<Category> category = categoryRepo.getCategory(id);
         if (category.isPresent()) {
             GsonUtils.convertToGson(category, response);
-        }
-    }
-
-    private void checkUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("userAccount") == null
-                && !((Optional<UserAccount>) session.getAttribute("userAccount"))
-                        .get().isIsAdmin()) {
-            response.sendRedirect("home");
         }
     }
 

@@ -32,8 +32,8 @@ public class HomeServlet extends HttpServlet {
     private CategoryRepositoryImpl categoryRepo;
     private ProductRepositoryImpl productRepo;
     private List<Product> products;
-    private Map<Product,Integer> cartProducts;
-    
+    private Map<Product, Integer> cartProducts;
+
     protected void getItems(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         checkForCartProducts(request);
@@ -48,7 +48,7 @@ public class HomeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("cartProducts") != null) {
             cartProducts = (HashMap<Product, Integer>) session.getAttribute("cartProducts");
-        }else{
+        } else {
             cartProducts = new HashMap<>();
         }
     }
@@ -78,18 +78,13 @@ public class HomeServlet extends HttpServlet {
                     addToCart(request);
                     break;
                 default:
-                    response.sendRedirect("home");
+                    getItems(request, response);
                     break;
 
             }
         } catch (Exception ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 
     private void myInit() {
@@ -102,21 +97,21 @@ public class HomeServlet extends HttpServlet {
 
         products = productRepo.getProductsByCategory(idCategory);
         request.setAttribute("products", products);
-        
+
         GsonUtils.convertToGson(products, response);
     }
 
     private void addToCart(HttpServletRequest request) throws IOException, Exception {
         int cartProduct = Integer.parseInt(request.getParameter("id"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        
+
         Product product = productRepo.getProduct(cartProduct).get();
-        if(cartProducts.containsKey(product)){
+        if (cartProducts.containsKey(product)) {
             cartProducts.computeIfPresent(product, (key, val) -> val + quantity);
-        }else{
+        } else {
             cartProducts.put(product, quantity);
         }
-        
+
         HttpSession session = request.getSession();
         session.setAttribute("cartProducts", cartProducts);
     }

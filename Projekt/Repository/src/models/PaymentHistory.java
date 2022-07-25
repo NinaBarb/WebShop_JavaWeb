@@ -6,6 +6,7 @@
 package models;
 
 import enums.PaymentType;
+import java.sql.Date;
 
 /**
  *
@@ -17,18 +18,29 @@ public class PaymentHistory {
     private PaymentType paymentType;
     private int idPayer;
     private String items;
+    private Date dateTime;
 
-    public PaymentHistory(int idPaymentHistory, PaymentType paymentType, int idPayer, String items) {
+    public PaymentHistory(int idPaymentHistory, PaymentType paymentType, int idPayer, String items, Date dateTime) {
         this.idPaymentHistory = idPaymentHistory;
         this.paymentType = paymentType;
         this.idPayer = idPayer;
         this.items = items;
+        this.dateTime = dateTime;
     }
 
-    public PaymentHistory(PaymentType paymentType, int idPayer, String items) {
+    public PaymentHistory(PaymentType paymentType, int idPayer, String items, Date dateTime) {
         this.paymentType = paymentType;
         this.idPayer = idPayer;
         this.items = items;
+        this.dateTime = dateTime;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public int getIdPaymentHistory() {

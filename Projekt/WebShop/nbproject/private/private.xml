@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/java/controllers/HomeServlet.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>48</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/skola/JavaWeb/Projekt/WebShop/src/java/controllers/HomeServlet.java</file>
-            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/javascript/home.js</file>
-            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/navbar.jsp</file>
-            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/home.jsp</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/src/java/controllers/LoginServlet.java</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/WEB-INF/web.xml</file>
             <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/cart.jsp</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/src/java/listeners/SessionListener.java</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/categoryEditor.jsp</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/purchaseHistory.jsp</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/deliveryInfo.jsp</file>
             <file>file:/D:/skola/JavaWeb/Projekt/WebShop/src/java/controllers/CartServlet.java</file>
             <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/javascript/cart.js</file>
+            <file>file:/D:/skola/JavaWeb/Projekt/WebShop/web/javascript/categoryEditor.js</file>
         </group>
     </open-files>
 </project-private>

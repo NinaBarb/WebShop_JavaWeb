@@ -16,13 +16,14 @@ import javax.sql.DataSource;
 import models.Product;
 import repo.IProductRepository;
 
-
 public class ProductRepositoryImpl implements IProductRepository {
+
     private static final String ID_PRODUCT = "IDProduct";
     private static final String TITLE = "Title";
     private static final String DESCRIPTION = "Descr";
     private static final String PRICE = "Price";
     private static final String PICTURE_PATH = "PicturePath";
+    private static final String CATEGORY_ID = "CategoryID";
 
     private static final String CREATE_PRODUCT = "{ CALL createProduct (?,?,?,?,?,?) }";
     private static final String SELECT_PRODUCTS = "{ CALL getProducts () }";
@@ -30,10 +31,10 @@ public class ProductRepositoryImpl implements IProductRepository {
     private static final String DELETE_PRODUCT = "{ CALL deleteProduct (?) }";
     private static final String GET_PRODUCT = "{ CALL getProduct (?) }";
     private static final String GET_PRODUCTS_BY_CATEGORY = "{ CALL getProductsByCategory (?) }";
-    private static final String UPDATE_PRODUCT = "{ CALL updateProduct (?,?,?,?,?) }";
-    
+    private static final String UPDATE_PRODUCT = "{ CALL updateProduct (?,?,?,?,?,?) }";
+
     @Override
-    public int createProduct(Product product, int categoryId) throws Exception {
+    public int createProduct(Product product) throws Exception {
         DataSource dataSource = DataSourceSingleton.getInstance();
         try (Connection con = dataSource.getConnection();
                 CallableStatement stmt = con.prepareCall(CREATE_PRODUCT)) {
@@ -42,7 +43,7 @@ public class ProductRepositoryImpl implements IProductRepository {
             stmt.setString(2, product.getDescription());
             stmt.setDouble(3, product.getPrice());
             stmt.setString(4, product.getPicturePath());
-            stmt.setInt(5, categoryId);
+            stmt.setInt(5, product.getCategoryId());
             stmt.registerOutParameter(6, Types.INTEGER);
 
             stmt.executeUpdate();
@@ -80,17 +81,18 @@ public class ProductRepositoryImpl implements IProductRepository {
                         rs.getInt(ID_PRODUCT),
                         rs.getString(TITLE),
                         rs.getString(DESCRIPTION),
+                        rs.getString(PICTURE_PATH),
                         rs.getDouble(PRICE),
-                        rs.getString(PICTURE_PATH));
+                        rs.getInt(CATEGORY_ID));
                 products.add(product);
             }
         }
         return products;
     }
-    
+
     @Override
     public List<Product> getProductsByCategory(int id) throws Exception {
-        List<Product> products  = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         DataSource dataSource = DataSourceSingleton.getInstance();
         try (Connection con = dataSource.getConnection();
                 CallableStatement stmt = con.prepareCall(GET_PRODUCTS_BY_CATEGORY)) {
@@ -98,11 +100,12 @@ public class ProductRepositoryImpl implements IProductRepository {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     products.add(new Product(
-                        rs.getInt(ID_PRODUCT),
-                        rs.getString(TITLE),
-                        rs.getString(DESCRIPTION),
-                        rs.getDouble(PRICE),
-                        rs.getString(PICTURE_PATH)));
+                            rs.getInt(ID_PRODUCT),
+                            rs.getString(TITLE),
+                            rs.getString(DESCRIPTION),
+                            rs.getString(PICTURE_PATH),
+                            rs.getDouble(PRICE),
+                            rs.getInt(CATEGORY_ID)));
                 }
             }
 
@@ -121,11 +124,12 @@ public class ProductRepositoryImpl implements IProductRepository {
 
                 if (rs.next()) {
                     return Optional.of(new Product(
-                            rs.getInt(ID_PRODUCT), 
-                            rs.getString(TITLE), 
-                            rs.getString(DESCRIPTION), 
-                            rs.getDouble(PRICE), 
-                            rs.getString(PICTURE_PATH)));
+                            rs.getInt(ID_PRODUCT),
+                            rs.getString(TITLE),
+                            rs.getString(DESCRIPTION),
+                            rs.getString(PICTURE_PATH),
+                            rs.getDouble(PRICE),
+                            rs.getInt(CATEGORY_ID)));
                 }
             }
         }
@@ -154,7 +158,8 @@ public class ProductRepositoryImpl implements IProductRepository {
             stmt.setString(3, product.getDescription());
             stmt.setDouble(4, product.getPrice());
             stmt.setString(5, product.getPicturePath());
-            
+            stmt.setInt(6, product.getCategoryId());
+
             stmt.executeUpdate();
         }
     }

@@ -9,14 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error Page</title>
+        <title>Error</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/success.css">
     </head>
     <body>
-        <div align="center">
-            <h1>Payment Error</h1>
-            <br/>
-            <h3>${errorMessage}</h3>
-            <br/>
+    <body>
+        <div class="card">
+            <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+                <i class="checkmark">❌</i>
+            </div>
+            <h1 style="color: red;">Error</h1> 
+            <p>${errorMessage}</p>
         </div>
-    </body>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        </body>
 </html>

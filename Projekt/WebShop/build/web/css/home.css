@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellota:wght@300;400&display=swap');
 body{
-font-family: 'Crimson Text', serif;
+    font-family: 'Bellota', cursive;
 }
 
 .lblError{
@@ -8,11 +8,16 @@ font-family: 'Crimson Text', serif;
 }
 
 .card {
-    background-color: #f2eae3;
+    background-color: #212529;
     height: 130px;
     overflow:hidden;
     border: none;
     border-radius: 15px
+}
+
+.card-body{
+    display: flex;
+    justify-content: space-between;
 }
 
 .imagename {

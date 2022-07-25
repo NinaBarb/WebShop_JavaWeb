@@ -24,6 +24,7 @@ function deleteProduct(id, element) {
             },
             success: function (data, textStatus, jqXHR) {
                 $(element).closest("tr").remove();
+                location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -45,7 +46,6 @@ function getProduct(id) {
             "action": "getProduct"
         },
         success: function (data, textStatus, jqXHR) {
-            console.log(data);
             $('#inTitle').val(data.value.title);
             $('#inPrice').val(data.value.price);
             $('#inDescription').val(data.value.description);
@@ -57,11 +57,10 @@ function getProduct(id) {
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     console.log($('#categories').children("option:selected").val());
-    $("#categories").on('change', function(){
+    $("#categories").on('change', function () {
         var selectedCountry = $(this).children("option:selected").val();
-        alert("You have selected the country - " + selectedCountry);
     });
 });
 
@@ -85,8 +84,7 @@ async function addProduct() {
             "action": "add"
         },
         success: function (data, textStatus, jqXHR) {
-            $(".tableBody").load(window.location.href + " .tableBody");
-            clearInput();
+            location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -95,6 +93,7 @@ async function addProduct() {
 }
 
 async function updateProduct(id) {
+    console.log($('#inTitle').val());
     let file = document.querySelector('#imgPicker').files[0];
     let image = null;
     if (file !== null) {
@@ -110,20 +109,11 @@ async function updateProduct(id) {
             "picturePath": image,
             "description": $('#inDescription').val(),
             "price": $('#inPrice').val(),
+            "category": $('#categories').children("option:selected").val(),
             "action": "update"
         },
         success: function (data, textStatus, jqXHR) {
-            console.log(data);
-            $(".tableBody").append("<tr>"
-                    + "<td>" + data.id + "</td>"
-                    + "<td>" + data.title + "</td>"
-                    + "<td>" + slika + "</td>"
-                    + "<td>"
-                    + "<a href='#' class='edit' onclick='getProduct(${data.id})'><i class='material-icons'>&#xE254;</i></a>"
-                    + "<a href='#' class='delete' onClick='deleteProduct(${data.id}, this)'><i class='material-icons'>&#xE872;</i></a>"
-                    + "</td>"
-                    + "</tr>");
-            clearInput();
+            location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);

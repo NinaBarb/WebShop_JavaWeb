@@ -31,17 +31,10 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("cartProducts") != null) {
             cartProducts = (HashMap<Product, Integer>) session.getAttribute("cartProducts");
-            multiplyPriceQuantity();
             request.setAttribute("products", cartProducts);
             request.setAttribute("totalPrice", getTotalPrice());
         }
         request.getRequestDispatcher("cart.jsp").forward(request, response);
-    }
-
-    private void multiplyPriceQuantity() {
-        for (Map.Entry<Product, Integer> product : cartProducts.entrySet()) {
-            product.getKey().setPrice(product.getValue() * product.getKey().getPrice());
-        }
     }
 
     private double getTotalPrice() {
@@ -86,11 +79,6 @@ public class CartServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 
     private void clearCart(HttpServletRequest request, HttpServletResponse response) throws IOException {

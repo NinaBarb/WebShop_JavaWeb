@@ -5,11 +5,7 @@
  */
 package models;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *
@@ -24,23 +20,34 @@ public class Product implements Serializable{
     private String description;
     private String picturePath;
     private double price;
+    private int categoryId;
 
     public Product() {
     }
 
-    public Product(int id, String title, String description, double price, String picturePath) {
+    public Product(int id, String title, String description, String picturePath, double price, int categoryId) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.price = price;
         this.picturePath = picturePath;
+        this.price = price;
+        this.categoryId = categoryId;
     }
 
-    public Product(String title, String description, double price, String picturePath) {
+    public Product(String title, String description, String picturePath, double price, int categoryId) {
         this.title = title;
         this.description = description;
-        this.price = price;
         this.picturePath = picturePath;
+        this.price = price;
+        this.categoryId = categoryId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public int getId() {
@@ -87,10 +94,6 @@ public class Product implements Serializable{
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.title);
-        hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.picturePath);
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
         return hash;
     }
 
@@ -109,27 +112,8 @@ public class Product implements Serializable{
         if (this.id != other.id) {
             return false;
         }
-        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
-            return false;
-        }
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.picturePath, other.picturePath)) {
-            return false;
-        }
         return true;
     }
-    
-     private void writeObject(ObjectOutputStream oos) 
-      throws IOException {
-    }
 
-    private void readObject(ObjectInputStream ois) 
-      throws ClassNotFoundException, IOException {
-    }
     
 }

@@ -30,9 +30,6 @@
                             <c:if test="${sessionScope.userAccount.get() == null}">
                                 <a class="nav-link" href="login">LogIn</a>
                             </c:if>
-                            <c:if test="${sessionScope.userAccount.get() != null}">
-                                <a class="nav-link" href="myProfile.jsp">MyProfile</a>
-                            </c:if>
                         </li>
                     </ul>
                     <form class="d-flex">

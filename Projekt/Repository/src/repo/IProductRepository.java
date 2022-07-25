@@ -14,7 +14,7 @@ import models.Product;
  * @author Nina
  */
 public interface IProductRepository {
-    int createProduct(Product product, int categoryId)throws Exception;
+    int createProduct(Product product)throws Exception;
     boolean doesProductExist(String title)throws Exception;
     List<Product> getProducts()throws Exception;
     List<Product> getProductsByCategory(int id)throws Exception;

@@ -13,6 +13,11 @@
         <title>Product Editor</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+        
+        <!--Belotta font!-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@300;400&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="css/categoryEditor.css">
     </head>
@@ -25,30 +30,30 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="input-group">
-                            <p>Image:</p>
+                            <p>Image: </p>
                             <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
                         </div>
-                        <div class="input-group">
-                            <p>Title</p>
+                        <div class="input-group mt-3">
+                            <p>Title: </p>
                             <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+"/>
                         </div>
-                        <div class="input-group">
-                            <p>Description</p>
+                        <div class="input-group mt-3">
+                            <p>Description: </p>
                             <input type="text" id="inDescription" required maxLength="500" pattern="[^()/><\][\\\x22,;|]+"/>
                         </div>
-                        <div class="input-group">
-                            <p>Price</p>
+                        <div class="input-group mt-3">
+                            <p>Price: </p>
                             <input type="number" id="inPrice" required min="0" inputmode="numeric" pattern="/^\d*\.?\d*$/"/>
                         </div>
-                        <div class="input-group">
-                            <p>Category</p>
+                        <div class="input-group mt-3">
+                            <p>Category: </p>
                             <select name="categories" id="categories">
                                 <c:forEach var="category" items="${categories}">
                                     <option value=${category.id}>${category.title}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <button type="submit" class="btnSubmit">Submit</button>
+                        <button type="submit" class="btnSubmit mt-3">Submit</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +75,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Image</th>
                                 <th>Description</th>
                                 <th>Price</th>
                                 <th>Actions</th>
@@ -81,9 +85,8 @@
                                 <tr>
                                     <td>${product.id}</td>
                                     <td>${product.title}</td>
-                                    <td>slika</td>
                                     <td>${product.description}</td>
-                                    <td>${product.price}</td>
+                                    <td>${product.price} €</td>
                                     <td>
                                         <a href="#" class="edit" onclick="getProduct(${product.id})"><i class="material-icons">&#xE254;</i></a>
                                         <a href="#" class="delete" onClick="deleteProduct(${product.id}, this)"><i class="material-icons">&#xE872;</i></a>
@@ -93,16 +96,7 @@
                         </tbody>
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="material-icons-outlined">skip_previous</i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="material-icons-outlined">skip_next</i></a></li>
-                        </ul>
+                        <div class="hint-text">Back to <b><a href="home">Home</a></b></div>
                     </div>
                 </div>
             </div>  

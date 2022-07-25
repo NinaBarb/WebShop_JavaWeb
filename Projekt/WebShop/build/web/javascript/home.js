@@ -31,14 +31,19 @@ function renderResults(data) {
         $(".productscontainer").empty();
         for (var i = 0; i < data.length; i++) {
             $(".productscontainer").append(
-                    "<div class='productCard'>"
+                    "<div class='productCard m-2'>"
                     + "<img class='card-img-top' width='200px' height='200px' src='" + data[i].picturePath + "' alt='Card image cap'>"
                     + "<div class='card-body'>"
                     + "<h5 class='card-title'>" + data[i].title + "</h5>"
                     + "<p class='card-text'>"
-                    + "<small class='text-muted'>" + data[i].price + "</small>"
+                    + "<small class='text-muted'>" + data[i].price + " €</small>"
                     + "</p>"
                     + "</div>"
+                    + "<div class='d-flex'>"
+                        +"<button onClick='addToCart(" + data[i].id + ")' class='btn btn-dark'>"
+                            +"<span class='material-icons-outlined'>shopping_cart</span>"
+                        +"</button>"
+                    +"</div>"
                     + "</div>"
                     ).fadeIn().delay(2000);
 

@@ -5,8 +5,6 @@
  */
 package sql;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -116,15 +114,13 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 
     @Override
     public void updateCategory(Category category) throws Exception {
-        File f = new File(category.getPicturePath());
         DataSource dataSource = DataSourceSingleton.getInstance();
         try (Connection con = dataSource.getConnection();
-                FileInputStream fs = new FileInputStream(f);
                 CallableStatement stmt = con.prepareCall(UPDATE_CATEGORY)) {
 
             stmt.setInt(1, category.getId());
             stmt.setString(2, category.getTitle());
-            stmt.setBinaryStream(3,fs,(int)f.length());
+            stmt.setString(3, category.getPicturePath());
             
             stmt.executeUpdate();
         }

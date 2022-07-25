@@ -28,11 +28,11 @@
                             <p>Image:</p>
                             <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group mt-3">
                             <p>Title</p>
                             <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+"/>
                         </div>
-                        <button type="submit" class="btnSubmit">Submit</button>
+                        <button type="submit" class="btnSubmit mt-3">Submit</button>
                     </div>
                 </div>
             </div>
@@ -73,16 +73,7 @@
                         </tbody>
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="material-icons-outlined">skip_previous</i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="material-icons-outlined">skip_next</i></a></li>
-                        </ul>
+                        <div class="hint-text">Back to <b><a href="home">Home</a></b></div>
                     </div>
                 </div>
             </div>  

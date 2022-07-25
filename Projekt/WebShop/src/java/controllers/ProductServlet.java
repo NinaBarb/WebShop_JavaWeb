@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.Category;
 import models.Product;
 import repo.RepositoryFactory;
@@ -49,7 +48,6 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            checkUser(request, response);
             myInit();
             processRequest(request, response);
         } catch (Exception ex) {
@@ -84,11 +82,6 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
     private void myInit() {
         productRepo = RepositoryFactory.getProductRepository();
         categoryRepo = RepositoryFactory.getCategoryRepository();
@@ -111,8 +104,8 @@ public class ProductServlet extends HttpServlet {
         if (productRepo.doesProductExist(title)) {
             GsonUtils.convertToGson(EXISTS, response);
         } else {
-            Product product = new Product(title, description, price, picturePath);
-            productRepo.createProduct(product, categoryId);
+            Product product = new Product(title, description, picturePath, price, categoryId);
+            productRepo.createProduct(product);
             GsonUtils.convertToGson(SUCCESS, response);
         }
     }
@@ -132,24 +125,15 @@ public class ProductServlet extends HttpServlet {
         String description = request.getParameter("description");
         Double price = Double.parseDouble(request.getParameter("price"));
         String picturePath = request.getParameter("picturePath");
+        int categoryId = Integer.parseInt(request.getParameter("category"));
 
         if (productRepo.getProduct(id).isPresent()) {
-            Product product = new Product(title, description, price, picturePath);
+            Product product = new Product(id, title, description, picturePath, price, categoryId);
             productRepo.updateProduct(product);
             GsonUtils.convertToGson(product, response);
         } else {
             GsonUtils.convertToGson(DOESNT_EXIST, response);
         }
-    }
-
-    private void checkUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-
-        /*if (session.getAttribute("userAccount") == null
-        && !((Optional<UserAccount>) session.getAttribute("userAccount"))
-        .get().isIsAdmin()) {
-        response.sendRedirect("home");
-        }*/
     }
 
 }

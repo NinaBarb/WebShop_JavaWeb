@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellota:wght@300;400&display=swap');
 body {
     background: #ddd;
     min-height: 100vh;
@@ -5,7 +6,8 @@ body {
     display: flex;
     font-family: sans-serif;
     font-size: 0.8rem;
-    font-weight: bold
+    font-weight: bold;
+    font-family: 'Bellota', cursive;
 }
 
 .title {
@@ -136,6 +138,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 .btn {
+    display: none;
     background-color: #000;
     border-color: #000;
     color: white;

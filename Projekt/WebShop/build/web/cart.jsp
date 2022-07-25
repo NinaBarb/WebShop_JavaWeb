@@ -49,7 +49,7 @@
                                     </a>
                                 </div>
                                 <div class="col">
-                                    &euro; ${product.getKey().price}
+                                    &euro; ${product.getKey().price * product.getValue()}
                                     <span class="close" id="${product.getKey().id}" onclick="removeProductFromCart(${product.getKey().id})">&#10005;</span>
                                 </div>
                             </div>
@@ -86,7 +86,12 @@
                         <div class="col">TOTAL PRICE</div>
                         <div class="col text-right">&euro; ${totalPrice}</div>
                     </div> 
-                    <a class="btn" href="checkout">
+                    <a class="btn" href="checkout" id="checkout">
+                        <span class="material-icons-outlined">
+                            shopping_cart_checkout
+                        </span>
+                    </a>
+                    <a class="btn" href="deliveryInfo.jsp" id="cashOnDelivery">
                         <span class="material-icons-outlined">
                             shopping_cart_checkout
                         </span>

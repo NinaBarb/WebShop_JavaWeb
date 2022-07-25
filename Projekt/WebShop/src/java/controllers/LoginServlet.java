@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 
         return ipAddress;
     }
-    
+
     private void addToLoginHistory(HttpServletRequest request, Optional<UserAccount> userAccount) throws Exception {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        isUserLoggedIn(request, response);
+        response.sendRedirect("login.jsp");
     }
 
     @Override
@@ -96,23 +96,8 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
     private void myInit() {
         accountRepo = RepositoryFactory.getAccountRepository();
         historyRepo = RepositoryFactory.getLoginHistoryRepository();
-    }
-
-    private void isUserLoggedIn(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("userAccount") != null) {
-            response.sendRedirect("home.jsp");
-        } else {
-            response.sendRedirect("login.jsp");
-        }
     }
 }
